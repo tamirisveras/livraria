@@ -1,0 +1,71 @@
+{% load static %}
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Livraria online">
+    <meta name="author" content="Equipe Livraria">
+    <meta name="generator" content="Hugo 0.104.2">
+    <title>Livraria</title>
+
+    <!-- CSS Bootstrap e Estilo Customizado -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Livraria</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cadastrar_livro' %}">Cadastrar Livro</a>
+          </li>
+          {% endif %}
+        </ul>
+        <form class="d-flex" action="{% url 'buscar_livro' %}" method="POST">
+          {% csrf_token %}
+          <input name="infor" class="form-control me-2" type="search" placeholder="Buscar livro" aria-label="Buscar">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+            <div class="d-flex align-items-center">
+              <span class="text-light me-3">{{ user.username }}</span>
+              <a class="btn btn-sm btn-danger" href="{% url 'logout_usuario' %}">Sair</a>
+            </div>
+            {% else %}
+            <a class="nav-link active" href="{% url 'page_login' %}">Login</a>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="container mt-5 pt-5">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="text-muted py-4 bg-light mt-5">
+  <div class="container text-center">
+    <p class="mb-0">
+      <a href="#" class="text-decoration-none">Voltar para o topo</a>
+    </p>
+  </div>
+</footer>
+
+<!-- JavaScript Bootstrap -->
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

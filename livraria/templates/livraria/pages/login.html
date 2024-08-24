@@ -1,0 +1,59 @@
+{% extends 'livraria/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+    <title>Livraria</title>
+</head>
+
+<body style="background-color: #f7f7f7; color: #333;">
+    <section style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center mb-4">
+                    <h1 style="font-size: 2rem; font-weight: 600; color: #555;"><strong>LIVRARIA</strong></h1>
+                    <p style="font-size: 1rem; color: #777;">Bem-vindo à livraria online</p>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card" style="border: 1px solid #ddd; border-radius: 5px;">
+                        <div class="card-body">
+                            <form action="{% url 'autenticar_usuario' %}" method="post">
+                                {% csrf_token %}
+                                <div class="form-group mb-3">
+                                    <label for="username" class="form-label" style="font-weight: 500;">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" required style="border-radius: 0; border: 1px solid #ccc;">
+                                </div>
+                                <div class="form-group mb-4">
+                                    <label for="password" class="form-label" style="font-weight: 500;">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" required style="border-radius: 0; border: 1px solid #ccc;">
+                                </div>
+                                <button type="submit" class="btn w-100" style="background-color: #333; color: #fff; border-radius: 0;">Sign in</button>
+                                <div class="text-center mt-3">
+                                    <a href="{% url 'cadastro' %}" class="text-decoration-none" style="color: #555;">Sign up</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>
+
+{% endblock %}

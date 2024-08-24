@@ -1,0 +1,12 @@
+{% extends 'livraria/base.html' %}
+
+{% block content %}
+    <h2 style="font-size: 2rem; font-weight: 600; color: #555; text-align: center; margin-bottom: 20px;">Novo livro</h2>
+    <form method="POST" enctype="multipart/form-data" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
+    {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn" style="background-color: #333; color: #fff; border-radius: 0; width: 100%; padding: 10px;">Save</button>
+    </form>
+{% endblock %}
